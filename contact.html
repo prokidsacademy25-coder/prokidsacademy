@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact & Înscrieri | ProKids Academy Ploiești</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #0e2f56;
+            --primary-dark: #07192e;
+            --accent: #cfa746;
+            --accent-light: #e6bc5a;
+            --bg-cream: #fdfbf7;
+            --white: #ffffff;
+            --text-dark: #1a1a1a;
+            --text-muted: #555555;
+            --radius-md: 25px;
+            --radius-lg: 50px;
+            --shadow-premium: 0 30px 60px rgba(14, 47, 86, 0.12);
+            --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* RESET & BASE */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background: var(--bg-cream); 
+            color: var(--text-dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* TEXTURES (Brez Style) */
+        .texture-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.04; pointer-events: none;
+        }
+
+        .grid-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background-image: radial-gradient(circle at 2px 2px, rgba(14, 47, 86, 0.05) 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+
+        .container { max-width: 1350px; margin: 0 auto; padding: 0 25px; }
+        h1, h2, h3 { font-family: 'Montserrat', sans-serif; letter-spacing: -1px; }
+        a { text-decoration: none; transition: var(--transition); }
+
+        /* NAVIGATION (Identic) */
+        header {
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            padding: 15px 0; background: rgba(253, 251, 247, 0.85);
+            backdrop-filter: blur(15px); border-bottom: 1px solid rgba(14, 47, 86, 0.05);
+        }
+        .nav-flex { display: flex; justify-content: space-between; align-items: center; }
+        .logo-box { display: flex; align-items: center; gap: 12px; font-weight: 900; color: var(--primary); font-size: 1.6rem; }
+        .logo-box img { height: 55px; }
+        .nav-menu { display: flex; align-items: center; gap: 35px; }
+        .nav-menu a { font-weight: 600; color: var(--primary); font-size: 0.95rem; }
+        .nav-menu a:hover { color: var(--accent); }
+        .btn-cta { background: var(--primary); color: white !important; padding: 12px 30px; border-radius: 50px; font-weight: 700; }
+
+        /* HERO CONTACT */
+        .hero-contact { padding: 180px 0 80px; text-align: center; position: relative; }
+        .hero-contact h1 { font-size: 4.5rem; color: var(--primary); margin-bottom: 20px; line-height: 1.1; }
+        .hero-contact p { font-size: 1.2rem; color: var(--text-muted); max-width: 700px; margin: 0 auto; }
+
+        /* CONTACT LAYOUT */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; margin-top: 80px; margin-bottom: 120px; }
+        
+        /* INFO CARDS */
+        .info-panel { display: flex; flex-direction: column; gap: 25px; }
+        .info-card { 
+            background: white; padding: 40px; border-radius: var(--radius-md); 
+            border: 1px solid rgba(0,0,0,0.03); transition: var(--transition);
+        }
+        .info-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-premium); }
+        .info-card i { font-size: 2rem; color: var(--accent); display: block; margin-bottom: 20px; }
+        .info-card h4 { font-size: 1.2rem; color: var(--primary); margin-bottom: 10px; }
+        .info-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* FORM STYLE */
+        .form-panel { 
+            background: white; padding: 60px; border-radius: var(--radius-lg); 
+            box-shadow: var(--shadow-premium); border: 1px solid rgba(0,0,0,0.02);
+        }
+        .form-panel h3 { font-size: 2.2rem; color: var(--primary); margin-bottom: 40px; }
+        
+        .form-group { margin-bottom: 25px; }
+        .form-group label { display: block; font-weight: 700; margin-bottom: 10px; font-size: 0.85rem; text-transform: uppercase; color: var(--primary); letter-spacing: 1px; }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%; padding: 18px; border-radius: 15px; border: 2px solid #eee;
+            font-family: inherit; font-size: 1rem; transition: var(--transition); background: #f9f9f9;
+        }
+        .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); outline: none; background: white; }
+        
+        .btn-submit {
+            width: 100%; background: var(--primary); color: white; padding: 20px;
+            border-radius: 50px; border: none; font-weight: 800; font-size: 1.1rem;
+            cursor: pointer; transition: var(--transition); box-shadow: 0 10px 20px rgba(14, 47, 86, 0.15);
+        }
+        .btn-submit:hover { background: var(--accent); transform: translateY(-5px); }
+
+        /* MAP SECTION */
+        .map-wrapper { 
+            height: 550px; width: 100%; border-radius: var(--radius-lg); overflow: hidden; 
+            box-shadow: var(--shadow-premium); margin-bottom: 120px; border: 10px solid white;
+        }
+
+        /* DARK CTA SECTION */
+        .visit-cta { 
+            background: var(--primary-dark); padding: 100px 0; border-radius: var(--radius-lg); 
+            color: white; text-align: center; position: relative; overflow: hidden;
+        }
+        .visit-cta h2 { font-size: 3rem; margin-bottom: 30px; }
+
+    /* --- FOOTER (Lions Afterschool Style) --- */
+        footer { background: var(--primary-dark); color: white; padding: 100px 0 40px; margin-top: 150px; }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 60px; margin-bottom: 80px; }
+        .footer-col h4 { color: var(--accent); text-transform: uppercase; letter-spacing: 3px; font-size: 0.85rem; margin-bottom: 35px; font-weight: 800; }
+        .footer-links li { list-style: none; margin-bottom: 18px; }
+        .footer-links a { color: rgba(255,255,255,0.6); font-size: 0.95rem; }
+        .footer-links a:hover { color: var(--accent); padding-left: 8px; }
+        .contact-box p { margin-bottom: 15px; display: flex; align-items: flex-start; gap: 10px; opacity: 0.8; }
+        .social-links { display: flex; gap: 15px; margin-top: 30px; }
+        .social-links a { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; }
+        .social-links a:hover { background: var(--accent); transform: translateY(-5px); }
+
+        /* REVEAL */
+        .reveal { opacity: 0; transform: translateY(40px); transition: 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 1100px) {
+            .contact-grid, .footer-grid { grid-template-columns: 1fr !important; }
+            .hero-contact h1 { font-size: 3rem; }
+            .form-panel { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="texture-overlay"></div>
+
+    <header>
+        <div class="container nav-flex">
+            <a href="index.html" class="logo-box">
+                <img src="logo.png" alt="ProKids">
+                <span>PROKIDS ACADEMY</span>
+            </a>
+            <nav class="nav-menu">
+                <a href="index.html">Acasă</a>
+                <a href="preturi.html">Tarife</a>
+                <a href="echipa.html">Echipa</a>
+                <a href="contact.html" class="btn-cta">Înscrieri 2026</a> 
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        
+        <section class="container hero-contact">
+            <div class="grid-bg"></div>
+            <div class="reveal">
+                <span style="color: var(--accent); font-weight: 800; letter-spacing: 3px; text-transform: uppercase;">Suntem aici pentru voi</span>
+                <h1>Hai să planificăm <br><span>viitorul copilului tău</span></h1>
+                <p>Ai întrebări despre programele noastre sau vrei să programezi o vizită la sediu? Echipa noastră este gata să îți ofere toate detaliile necesare.</p>
+            </div>
+        </section>
+
+        <section class="container contact-grid">
+            
+            <div class="info-panel reveal">
+                <div class="info-card">
+                    <i>📍</i>
+                    <h4>Locația Noastră</h4>
+                    <p>Strada Rudului 24, Ploiești, România </p>
+                </div>
+                <div class="info-card">
+                    <i>📞</i>
+                    <h4>Sunați-ne</h4>
+                    <p>0244 542 341</p><p>Luni - Vineri: 08:00 - 19:00</p> 
+                </div>
+                <div class="info-card">
+                    <i>✉️</i>
+                    <h4>Scrieți-ne</h4>
+                    <p>prokidsacademy25@gmail.com<br>Raspundem în maxim 24h.</p>
+                </div>
+                <div class="info-card" style="background: var(--primary); color: white;">
+                    <i style="color: var(--accent);">✨</i>
+                    <h4 style="color: white;">Vizite Sediul</h4>
+                    <p style="color: rgba(255,255,255,0.7);">Pentru a menține siguranța copiilor, vizitele se fac doar cu programare prealabilă.</p>
+                </div>
+            </div>
+
+            <div class="form-panel reveal">
+                <h3>Trimite un mesaj</h3>
+                <form action="#">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div class="form-group">
+                            <label>Nume Părinte</label>
+                            <input type="text" placeholder="Ex: Popescu Ion">
+                        </div>
+                        <div class="form-group">
+                            <label>Telefon</label>
+                            <input type="tel" placeholder="07xx xxx xxx">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Program de interes</label>
+                        <select>
+                            <option>After School Standard</option>
+                            <option>Academy of Arts (Canto/Dans)</option>
+                            <option>Pachet All-In</option>
+                            <option>Altă solicitare</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Vârsta copilului</label>
+                        <input type="number" placeholder="Ex: 8">
+                    </div>
+                    <div class="form-group">
+                        <label>Mesajul tău / Întrebări</label>
+                        <textarea rows="5" placeholder="Cu ce vă putem ajuta?"></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Trimite Solicitarea</button>
+                </form>
+            </div>
+
+        </section>
+
+        <section class="container reveal">
+            <h2 style="text-align: center; margin-bottom: 40px; color: var(--primary);">Găsește-ne pe hartă</h2>
+            <div class="map-wrapper">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5648.775689725466!2d26.025316700168695!3d44.93578297922411!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b2498de1d3e4eb%3A0xb1d787454d6093e8!2sVirgin%20Madgearu%20Economic%20College!5e0!3m2!1sen!2sro!4v1763546111089!5m2!1sen!2sro" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </section>
+
+    </main>
+
+        <footer>
+        <div class="container">
+            <div class="footer-grid">
+                
+                <div class="footer-col">
+                    <div class="logo-box" style="color: white; margin-bottom: 30px;">
+                        <img src="logo.png" alt="ProKids" style="filter: brightness(0) invert(1);">
+                        <span>PROKIDS</span>
+                    </div>
+                    <p style="opacity: 0.6; line-height: 2; font-size: 0.95rem;">
+                        Excelență în educație extrașcolară și arte în Ploiești. Suntem dedicați formării viitoarei generații prin metode moderne, siguranță deplină și pasiune infinită.
+                    </p>
+                    <div class="social-links">
+                        <a href="#">f</a>
+                        <a href="#">ig</a>
+                        <a href="#">tk</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Navigare Rapidă</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Acasă</a></li>
+                        <li><a href="preturi.html">Tarife Abonamente</a></li>
+                        <li><a href="echipa.html">Echipa Noastră</a></li>
+                        <li><a href="contact.html">Contact & Înscrieri</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Programele Noastre</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">After School Standard</a></li>
+                        <li><a href="#">Canto & Voce</a></li>
+                        <li><a href="#">Dans & Mișcare</a></li>
+                        <li><a href="#">Ateliere de Creație</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col contact-box">
+                    <h4>Contact Direct</h4>
+                    <p>📍 Strada Rudului 24, Ploiești, România</p>
+                    <p>📞  0244 542 341 (Luni - Vineri: 08:00 - 19:00)</p>
+                    <p>✉️ prokidsacademy25@gmail.com</p>
+                    <p style="margin-top: 25px; color: var(--accent); font-weight: 700;">Vizitele se fac cu programare prealabilă.</p>
+                </div>
+
+            </div>
+
+            <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; opacity: 0.4; font-size: 0.85rem;">
+                <p>© 2026 ProKids Academy. Toate drepturile rezervate. Creat pentru viitori campioni.</p>
+                <div style="display: flex; gap: 30px;">
+                    <a href="#" style="color: white;">Termeni și Condiții</a>
+                    <a href="#" style="color: white;">Politica GDPR</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Reveal effect
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
