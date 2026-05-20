@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarife & Pachete | ProKids Academy Ploiești</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #0e2f56; --primary-dark: #07192e; --primary-mid: #1a4a7a;
+            --accent: #cfa746; --accent-light: #e8c96a; --accent-glow: rgba(207,167,70,0.22);
+            --bg-cream: #faf8f3; --bg-warm: #f5f1e8;
+            --white: #ffffff; --text-dark: #0f1923; --text-muted: #6b7280;
+            --glass-bg: rgba(255,255,255,0.72); --glass-border: rgba(255,255,255,0.5);
+            --radius-sm: 14px; --radius-md: 24px; --radius-lg: 48px;
+            --shadow-soft: 0 4px 24px rgba(14,47,86,0.07);
+            --shadow-premium: 0 24px 64px rgba(14,47,86,0.13);
+            --ease-out: cubic-bezier(0.16,1,0.3,1); --ease-spring: cubic-bezier(0.34,1.56,0.64,1);
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'DM Sans', sans-serif; background: var(--bg-cream); color: var(--text-dark); overflow-x: hidden; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3, h4 { font-family: 'Fraunces', serif; text-wrap: balance; }
+        a { text-decoration: none; transition: all 0.4s var(--ease-out); }
+
+        .aurora-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -3; pointer-events: none; overflow: hidden; }
+        .aurora-bg::before { content: ''; position: absolute; top: -40%; left: -20%; width: 80%; height: 80%; background: radial-gradient(ellipse, rgba(14,47,86,0.06) 0%, transparent 70%); animation: drift1 18s ease-in-out infinite alternate; }
+        .aurora-bg::after { content: ''; position: absolute; bottom: -30%; right: -20%; width: 70%; height: 70%; background: radial-gradient(ellipse, rgba(207,167,70,0.05) 0%, transparent 70%); animation: drift2 22s ease-in-out infinite alternate; }
+        @keyframes drift1 { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(8%,5%) scale(1.1); } }
+        @keyframes drift2 { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(-6%,-8%) scale(1.15); } }
+        .noise-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none; opacity: 0.028; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+        .container { max-width: 1360px; margin: 0 auto; padding: 0 32px; }
+
+        /* HEADER */
+        header { position: fixed; width: 100%; top: 0; z-index: 1000; transition: all 0.5s var(--ease-out); }
+        .header-inner { margin: 16px 32px; background: var(--glass-bg); backdrop-filter: blur(24px) saturate(180%); border: 1px solid var(--glass-border); border-radius: var(--radius-lg); padding: 14px 32px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 8px 32px rgba(14,47,86,0.08), inset 0 1px 0 rgba(255,255,255,0.8); transition: all 0.5s var(--ease-out); }
+        header.scrolled .header-inner { margin: 8px 24px; padding: 10px 28px; box-shadow: 0 16px 48px rgba(14,47,86,0.14), inset 0 1px 0 rgba(255,255,255,0.8); }
+        .logo-box { display: flex; align-items: center; gap: 12px; font-family: 'Fraunces', serif; font-weight: 700; color: var(--primary); font-size: 1.4rem; letter-spacing: -0.5px; }
+        .logo-box img { height: 48px; }
+        .logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+        .logo-text small { font-family: 'DM Sans', sans-serif; font-size: 0.6rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); opacity: 0.9; }
+        .nav-menu { display: flex; align-items: center; gap: 6px; }
+        .nav-menu a { font-weight: 500; color: var(--text-dark); font-size: 0.9rem; padding: 8px 16px; border-radius: 50px; transition: all 0.3s var(--ease-out); }
+        .nav-menu a:hover { color: var(--primary); background: rgba(14,47,86,0.06); }
+        .nav-menu a.active { color: var(--primary); font-weight: 700; background: rgba(14,47,86,0.05); }
+        .btn-nav-cta { background: var(--primary); color: white !important; padding: 10px 26px; border-radius: 50px; font-weight: 600; font-size: 0.9rem; box-shadow: 0 4px 16px rgba(14,47,86,0.25); transition: all 0.4s var(--ease-spring) !important; }
+        .btn-nav-cta:hover { background: var(--accent) !important; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(207,167,70,0.35) !important; }
+        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; z-index: 1001; padding: 4px; }
+        .hamburger span { width: 26px; height: 2px; background: var(--primary); border-radius: 2px; transition: all 0.35s var(--ease-out); display: block; }
+        .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        /* HERO PRICING */
+        .hero-pricing {
+            padding: 180px 0 80px; text-align: center; position: relative;
+        }
+        .section-label { display: inline-block; padding: 6px 18px; background: rgba(207,167,70,0.1); color: #9a7a2e; border-radius: 50px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; }
+        .hero-pricing h1 { font-size: clamp(2.8rem, 5vw, 5rem); color: var(--primary); letter-spacing: -2.5px; margin-bottom: 20px; line-height: 1; }
+        .hero-pricing p { font-size: 1.1rem; color: var(--text-muted); max-width: 580px; margin: 0 auto; }
+
+        /* AGE SELECTOR */
+        .age-selector-wrap { margin: 60px 0 80px; display: flex; justify-content: center; }
+        .age-tabs {
+            display: inline-flex; gap: 8px; padding: 8px;
+            background: white; border-radius: 50px;
+            box-shadow: 0 8px 32px rgba(14,47,86,0.08), inset 0 1px 3px rgba(14,47,86,0.04);
+            border: 1px solid rgba(14,47,86,0.06);
+        }
+        .age-btn {
+            padding: 12px 28px; border-radius: 50px; border: none;
+            background: transparent; cursor: pointer; font-weight: 600; color: var(--text-muted);
+            transition: all 0.35s var(--ease-out); font-size: 0.9rem;
+            font-family: 'DM Sans', sans-serif;
+        }
+        .age-btn.active {
+            background: var(--primary); color: white;
+            box-shadow: 0 8px 24px rgba(14,47,86,0.25);
+            transform: scale(1.02);
+        }
+        .age-btn:not(.active):hover { background: rgba(14,47,86,0.05); color: var(--primary); }
+
+        /* PRICING GRID */
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 24px; }
+        .pricing-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 800px; margin: 0 auto 120px; }
+
+        .price-card {
+            background: white; border-radius: var(--radius-md); padding: 48px 36px;
+            text-align: center; position: relative;
+            border: 1px solid rgba(14,47,86,0.05);
+            transition: all 0.5s var(--ease-out);
+            display: flex; flex-direction: column;
+        }
+        .price-card:hover { transform: translateY(-12px); box-shadow: var(--shadow-premium); }
+
+        .price-card.featured {
+            background: var(--primary);
+            border-color: transparent;
+            box-shadow: 0 24px 64px rgba(14,47,86,0.25);
+        }
+        .price-card.featured:hover { transform: translateY(-16px); box-shadow: 0 40px 80px rgba(14,47,86,0.35); }
+
+        .popular-badge {
+            position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            color: var(--primary-dark); padding: 6px 24px; border-radius: 50px;
+            font-size: 0.68rem; font-weight: 800; letter-spacing: 2px;
+            text-transform: uppercase; white-space: nowrap;
+            box-shadow: 0 4px 16px rgba(207,167,70,0.4);
+        }
+
+        .price-icon {
+            width: 64px; height: 64px; border-radius: var(--radius-sm);
+            margin: 0 auto 24px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem;
+            background: rgba(14,47,86,0.04);
+            transition: transform 0.4s var(--ease-spring);
+        }
+        .price-card.featured .price-icon { background: rgba(255,255,255,0.1); }
+        .price-card:hover .price-icon { transform: scale(1.12) rotate(5deg); }
+
+        .price-card h3 {
+            font-size: 1.1rem; font-family: 'DM Sans', sans-serif;
+            text-transform: uppercase; letter-spacing: 2px;
+            font-weight: 700; margin-bottom: 24px;
+            color: var(--primary);
+        }
+        .price-card.featured h3 { color: rgba(255,255,255,0.7); }
+
+        .price-amount {
+            display: flex; align-items: flex-end; justify-content: center; gap: 6px;
+            margin-bottom: 32px; line-height: 1;
+        }
+        .price-num {
+            font-family: 'Fraunces', serif; font-size: 4rem; font-weight: 900;
+            color: var(--accent); letter-spacing: -3px;
+            transition: all 0.4s var(--ease-out);
+        }
+        .price-card.featured .price-num { color: white; }
+        .price-unit {
+            font-size: 0.85rem; color: var(--text-muted); font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1px; padding-bottom: 8px;
+        }
+        .price-card.featured .price-unit { color: rgba(255,255,255,0.5); }
+
+        .price-divider { width: 40px; height: 2px; background: rgba(14,47,86,0.08); margin: 0 auto 28px; }
+        .price-card.featured .price-divider { background: rgba(255,255,255,0.15); }
+
+        .feature-list { text-align: left; margin-bottom: 36px; flex-grow: 1; list-style: none; }
+        .feature-list li {
+            margin-bottom: 13px; display: flex; align-items: flex-start; gap: 10px;
+            font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;
+        }
+        .feature-list li::before {
+            content: '';
+            width: 18px; height: 18px; flex-shrink: 0; margin-top: 1px;
+            background: rgba(207,167,70,0.15);
+            border-radius: 50%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='7' fill='none'%3E%3Cpath d='M1 3.5l2 2L8 1' stroke='%23cfa746' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: center;
+        }
+        .price-card.featured .feature-list li { color: rgba(255,255,255,0.7); }
+        .price-card.featured .feature-list li::before { background-color: rgba(255,255,255,0.1); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='7' fill='none'%3E%3Cpath d='M1 3.5l2 2L8 1' stroke='%23e8c96a' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+
+        .btn-price {
+            display: block; text-align: center; padding: 16px;
+            border-radius: var(--radius-sm); font-weight: 700; font-size: 0.88rem;
+            text-transform: uppercase; letter-spacing: 1.5px;
+            transition: all 0.35s var(--ease-spring);
+            background: var(--bg-cream); color: var(--primary);
+        }
+        .btn-price:hover { background: var(--primary); color: white; transform: scale(1.02); }
+        .price-card.featured .btn-price { background: var(--accent); color: var(--primary-dark); box-shadow: 0 8px 24px rgba(207,167,70,0.35); }
+        .price-card.featured .btn-price:hover { background: white; transform: scale(1.02); }
+
+        /* COUNTER ANIMATION */
+        .price-num { transition: opacity 0.25s, transform 0.25s var(--ease-spring); }
+        .price-num.switching { opacity: 0; transform: translateY(-8px); }
+
+        /* FOOTER */
+        footer { background: var(--primary-dark); color: white; padding: 100px 0 48px; position: relative; overflow: hidden; }
+        footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+        .footer-grid { display: grid; grid-template-columns: 1.8fr 1fr 1fr 1.3fr; gap: 60px; margin-bottom: 80px; }
+        .footer-col h5 { color: var(--accent); text-transform: uppercase; letter-spacing: 3px; font-size: 0.72rem; font-weight: 700; margin-bottom: 28px; font-family: 'DM Sans', sans-serif; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 14px; }
+        .footer-links a { color: rgba(255,255,255,0.55); font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0; transition: all 0.3s var(--ease-out); }
+        .footer-links a:hover { color: white; padding-left: 4px; }
+        .footer-contact p { display: flex; align-items: flex-start; gap: 12px; color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-bottom: 16px; line-height: 1.5; }
+        .contact-icon { width: 32px; height: 32px; background: rgba(207,167,70,0.12); border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
+        .social-row { display: flex; gap: 12px; margin-top: 28px; }
+        .social-btn { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.6); font-size: 0.82rem; font-weight: 700; transition: all 0.3s var(--ease-spring); }
+        .social-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--primary-dark); transform: translateY(-4px); }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .footer-bottom p { opacity: 0.35; font-size: 0.82rem; }
+        .footer-bottom-links { display: flex; gap: 28px; }
+        .footer-bottom-links a { color: rgba(255,255,255,0.35); font-size: 0.82rem; }
+        .footer-bottom-links a:hover { color: rgba(255,255,255,0.7); }
+
+        /* REVEAL */
+        .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s !important; }
+        .reveal-delay-2 { transition-delay: 0.2s !important; }
+        .reveal-delay-3 { transition-delay: 0.3s !important; }
+
+        /* RESPONSIVE */
+        @media (max-width: 992px) {
+            .pricing-grid, .pricing-grid-2 { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .hamburger { display: flex; }
+            .nav-menu { position: fixed; top: 0; right: -100%; width: 80%; max-width: 340px; height: 100vh; background: white; flex-direction: column; justify-content: center; align-items: flex-start; gap: 8px; padding: 40px 32px; box-shadow: -20px 0 60px rgba(14,47,86,0.15); transition: right 0.45s var(--ease-out); }
+            .nav-menu.open { right: 0; }
+            .nav-menu a { font-size: 1.2rem; padding: 12px 0; font-weight: 600; width: 100%; }
+        }
+        @media (max-width: 640px) {
+            .container { padding: 0 20px; }
+            .header-inner { margin: 10px 16px; padding: 12px 20px; }
+            .age-tabs { flex-wrap: wrap; border-radius: var(--radius-sm); }
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="aurora-bg"></div>
+    <div class="noise-overlay"></div>
+
+    <header id="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo-box">
+                <img src="logo.png" alt="ProKids Logo">
+                <div class="logo-text">ProKids <small>Academy</small></div>
+            </a>
+            <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+            <nav class="nav-menu" id="nav-menu">
+                <a href="index.html">Acasă</a>
+                <a href="preturi.html" class="active">Tarife</a>
+                <a href="scouting.html">Scouting ⚽</a>
+                <a href="echipa.html">Echipa</a>
+                <a href="contact.html" class="btn-nav-cta">Înscrieri 2026</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="container hero-pricing">
+            <div class="reveal">
+                <span class="section-label">Investiție în Viitor</span>
+                <h1>Alege Pachetul Tău</h1>
+                <p>Tarife transparente, extrase din lista oficială. Selectează grupa de vârstă.</p>
+            </div>
+
+            <div class="age-selector-wrap reveal">
+                <div class="age-tabs">
+                    <button class="age-btn active" onclick="updatePrices('4-6', this)">4 – 6 ani</button>
+                    <button class="age-btn" onclick="updatePrices('7-10', this)">7 – 10 ani</button>
+                    <button class="age-btn" onclick="updatePrices('11-14', this)">11 – 14 ani</button>
+                    <button class="age-btn" onclick="updatePrices('15-18', this)">15 – 18 ani</button>
+                </div>
+            </div>
+
+            <div class="pricing-grid reveal">
+                <div class="price-card">
+                    <div class="price-icon">🎤</div>
+                    <h3>Canto</h3>
+                    <div class="price-amount">
+                        <span class="price-num" id="price-canto">190</span>
+                        <span class="price-unit">Lei / lună</span>
+                    </div>
+                    <div class="price-divider"></div>
+                    <ul class="feature-list">
+                        <li>Ședințe individuale 50 min</li>
+                        <li>Tehnică vocală și respirație</li>
+                        <li>Pregătire concursuri</li>
+                    </ul>
+                    <a href="contact.html" class="btn-price">Rezervă Loc</a>
+                </div>
+
+                <div class="price-card featured">
+                    <div class="popular-badge">⭐ Popular</div>
+                    <div class="price-icon">💃</div>
+                    <h3>Dans</h3>
+                    <div class="price-amount">
+                        <span class="price-num" id="price-dans">150</span>
+                        <span class="price-unit" style="color:rgba(255,255,255,0.4);">Lei / lună</span>
+                    </div>
+                    <div class="price-divider"></div>
+                    <ul class="feature-list">
+                        <li>2 ședințe pe săptămână</li>
+                        <li>Coregrafie & Show</li>
+                        <li>Echipament inclus</li>
+                    </ul>
+                    <a href="contact.html" class="btn-price">Înscrie-te acum</a>
+                </div>
+
+                <div class="price-card">
+                    <div class="price-icon">🎨</div>
+                    <h3>Arte Vizuale</h3>
+                    <div class="price-amount">
+                        <span class="price-num" id="price-arte">198</span>
+                        <span class="price-unit">Lei / lună</span>
+                    </div>
+                    <div class="price-divider"></div>
+                    <ul class="feature-list">
+                        <li>Materiale premium incluse</li>
+                        <li>Pictură & Modelaj</li>
+                        <li>Expoziții lunare</li>
+                    </ul>
+                    <a href="contact.html" class="btn-price">Rezervă Loc</a>
+                </div>
+            </div>
+
+            <div class="pricing-grid-2 reveal">
+                <div class="price-card">
+                    <div class="price-icon">🎭</div>
+                    <h3>Arte și Spectacol</h3>
+                    <div class="price-amount">
+                        <span class="price-num" id="price-spectacol">180</span>
+                        <span class="price-unit">Lei / lună</span>
+                    </div>
+                    <div class="price-divider"></div>
+                    <ul class="feature-list">
+                        <li>Actorie & Prezență scenică</li>
+                        <li>Dicție și mișcare</li>
+                        <li>Spectacole trimestriale</li>
+                    </ul>
+                    <a href="contact.html" class="btn-price">Rezervă Loc</a>
+                </div>
+
+                <div class="price-card">
+                    <div class="price-icon">🧠</div>
+                    <h3>Cultură Generală</h3>
+                    <div class="price-amount">
+                        <span class="price-num" id="price-cultura">182</span>
+                        <span class="price-unit">Lei / lună</span>
+                    </div>
+                    <div class="price-divider"></div>
+                    <ul class="feature-list">
+                        <li>Ateliere interactive</li>
+                        <li>Dezvoltare cognitivă</li>
+                        <li>Curiozități și știință</li>
+                    </ul>
+                    <a href="contact.html" class="btn-price">Rezervă Loc</a>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="index.html" class="logo-box" style="color:white; margin-bottom: 20px; display: flex;">
+                        <img src="logo.png" alt="ProKids" style="filter: brightness(0) invert(1);">
+                        <div class="logo-text" style="color:white;">ProKids <small style="color: var(--accent);">Academy</small></div>
+                    </a>
+                    <p style="color:rgba(255,255,255,0.5); font-size:0.9rem; max-width:280px; line-height:1.75;">Excelență în educație extrașcolară și arte în Ploiești.</p>
+                    <div class="social-row">
+                        <a href="#" class="social-btn">f</a>
+                        <a href="#" class="social-btn">ig</a>
+                        <a href="#" class="social-btn">tk</a>
+                    </div>
+                </div>
+                <div>
+                    <h5>Navigare</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Acasă</a></li>
+                        <li><a href="preturi.html">Tarife</a></li>
+                        <li><a href="echipa.html">Echipa</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5>Programe</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">After School</a></li>
+                        <li><a href="#">Canto</a></li>
+                        <li><a href="#">Dans</a></li>
+                        <li><a href="#">Pian</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h5>Contact Direct</h5>
+                    <p><span class="contact-icon">📍</span>Strada Rudului 24, Ploiești</p>
+                    <p><span class="contact-icon">📞</span>0244 542 341</p>
+                    <p><span class="contact-icon">✉️</span>prokidsacademy25@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 ProKids Academy. Toate drepturile rezervate.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Termeni</a>
+                    <a href="#">GDPR</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const priceData = {
+            '4-6':   { canto:"190", dans:"150", arte:"198", spectacol:"180", cultura:"182" },
+            '7-10':  { canto:"190", dans:"160", arte:"220", spectacol:"205", cultura:"205" },
+            '11-14': { canto:"210", dans:"160", arte:"257", spectacol:"220", cultura:"225" },
+            '15-18': { canto:"215", dans:"180", arte:"286", spectacol:"235", cultura:"260" }
+        };
+
+        function animateNum(el, newVal) {
+            el.classList.add('switching');
+            setTimeout(() => {
+                el.textContent = newVal;
+                el.classList.remove('switching');
+            }, 200);
+        }
+
+        function updatePrices(age, btn) {
+            document.querySelectorAll('.age-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const d = priceData[age];
+            animateNum(document.getElementById('price-canto'), d.canto);
+            animateNum(document.getElementById('price-dans'), d.dans);
+            animateNum(document.getElementById('price-arte'), d.arte);
+            animateNum(document.getElementById('price-spectacol'), d.spectacol);
+            animateNum(document.getElementById('price-cultura'), d.cultura);
+        }
+
+        // Header
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 80));
+
+        // Mobile nav
+        const ham = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        ham.addEventListener('click', () => { ham.classList.toggle('open'); navMenu.classList.toggle('open'); });
+
+        // Reveal
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); obs.unobserve(e.target); } });
+        }, { threshold: 0.08 });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    </script>
+</body>
+</html>
