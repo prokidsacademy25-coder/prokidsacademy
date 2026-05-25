@@ -399,64 +399,75 @@
             background-repeat: no-repeat; background-position: center;
         }
 
-        /* ─── TESTIMONIALS ───────────────────── */
-        .testimonials-section {
-            padding: 120px 0;
-        }
-        .t-wrapper {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-mid) 60%, #1e5a9e 100%);
-            border-radius: var(--radius-xl); overflow: hidden; position: relative;
-            padding: 80px 0 60px;
-        }
-        .t-wrapper::before {
-            content: '';
-            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='1' fill='rgba(255,255,255,0.04)'/%3E%3C/svg%3E");
-            background-size: 60px 60px;
-        }
-        .t-header { text-align: center; margin-bottom: 50px; padding: 0 40px; position: relative; z-index: 1; }
-        .t-header .section-label { background: rgba(207,167,70,0.15); color: var(--accent-light); }
-        .t-header .section-title { color: white; }
+        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       TESTIMONIALS
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    .testimonials { padding: 160px 0; }
 
-        .swiper { padding: 20px 40px 80px !important; position: relative; z-index: 1; }
-        .swiper-slide {
-            opacity: 0.4; transition: opacity 0.5s;
-            display: flex; justify-content: center; height: auto;
-        }
-        .swiper-slide-active { opacity: 1; }
+    .t-head { margin-bottom: 80px; }
 
-        .t-card {
-            background: rgba(255,255,255,0.07);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: var(--radius-md); padding: 48px;
-            max-width: 620px; width: 100%;
-            transition: transform 0.4s var(--ease-out);
-        }
-        .t-card:hover { transform: translateY(-6px); }
-        .t-quote {
-            font-family: 'Fraunces', serif; font-size: 1.3rem;
-            font-style: italic; color: rgba(255,255,255,0.9);
-            line-height: 1.7; margin-bottom: 36px;
-        }
-        .t-quote::before { content: '\201C'; color: var(--accent); font-size: 3rem; line-height: 0; vertical-align: -0.5em; margin-right: 4px; }
-        .t-author { display: flex; align-items: center; gap: 16px; }
-        .t-author img {
-            width: 54px; height: 54px; border-radius: 50%;
-            border: 3px solid var(--accent); object-fit: cover;
-        }
-        .t-author strong { display: block; color: white; font-weight: 700; }
-        .t-author small { color: rgba(255,255,255,0.5); font-size: 0.82rem; }
+    .t-track-wrap {
+        overflow: hidden;
+        position: relative;
+    }
+    .t-track-wrap::before,
+    .t-track-wrap::after {
+        content: '';
+        position: absolute; top: 0; bottom: 0;
+        width: 120px; z-index: 2; pointer-events: none;
+    }
+    .t-track-wrap::before { left: 0; background: linear-gradient(to right, var(--ink), transparent); }
+    .t-track-wrap::after  { right: 0; background: linear-gradient(to left, var(--ink), transparent); }
 
-        .swiper-button-next, .swiper-button-prev {
-            color: var(--accent) !important;
-            width: 48px !important; height: 48px !important;
-            background: rgba(255,255,255,0.1); border-radius: 50%;
-        }
-        .swiper-button-next::after, .swiper-button-prev::after { font-size: 16px !important; font-weight: 900 !important; }
-        .swiper-pagination-bullet { background: rgba(255,255,255,0.3) !important; width: 8px !important; height: 8px !important; }
-        .swiper-pagination-bullet-active { background: var(--accent) !important; width: 32px !important; border-radius: 4px !important; }
+    .t-track {
+        display: flex; gap: 24px;
+        animation: scrollLeft 40s linear infinite;
+        width: max-content;
+    }
+    .t-track:hover { animation-play-state: paused; }
 
+    @keyframes scrollLeft {
+        from { transform: translateX(0); }
+        to   { transform: translateX(-50%); }
+    }
+
+    .t-card {
+        width: 440px; flex-shrink: 0;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: var(--r-md); padding: 40px;
+        transition: all 0.4s var(--ease);
+    }
+    .t-card:hover {
+        background: rgba(201,168,76,0.04);
+        border-color: rgba(201,168,76,0.15);
+        transform: translateY(-8px);
+    }
+
+    .t-stars {
+        display: flex; gap: 4px; margin-bottom: 24px;
+    }
+    .t-stars span { color: var(--gold); font-size: 0.9rem; }
+
+    .t-quote {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.2rem; font-style: italic;
+        color: rgba(255,255,255,0.8);
+        line-height: 1.65; margin-bottom: 32px;
+    }
+
+    .t-author-row {
+        display: flex; align-items: center; gap: 14px;
+        border-top: 1px solid rgba(255,255,255,0.06);
+        padding-top: 24px;
+    }
+    .t-avatar {
+        width: 46px; height: 46px; border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid rgba(201,168,76,0.3);
+    }
+    .t-author-name { font-weight: 600; font-size: 0.9rem; color: white; }
+    .t-author-role { font-size: 0.78rem; color: rgba(255,255,255,0.35); margin-top: 2px; }
         /* ─── CTA STRIP ──────────────────────── */
         .cta-strip {
             margin: 0 0 120px;
